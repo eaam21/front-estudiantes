@@ -83,14 +83,10 @@ constructor(
   }
 
   guardar(): void{
-
     if(this.dataEstudiante != null){
-      console.log("******########***")
-      console.log(this.dataEstudiante.idEstudiante)
-      console.log("******########***")
       this.estudianteService.actualizar(this.dataEstudiante.idEstudiante,this.estudiante).subscribe(
         (resp:any)=>{
-          this.dialogRef.close({event:'Add', respuestaGuardar:resp.data})
+          this.dialogRef.close({respuestaGuardar:resp.data})
           this.openSnackBar(resp.mensaje)
         }
       )
@@ -98,7 +94,7 @@ constructor(
       this.estudianteService.registrar(this.estudiante).subscribe(
         (resp:any)=>{
           console.log(resp)
-          this.dialogRef.close({event:'Add', respuestaGuardar:resp.data})
+          this.dialogRef.close({respuestaGuardar:resp.data})
           this.openSnackBar(resp.mensaje)
         }
       )
@@ -109,7 +105,7 @@ constructor(
     this._snackBar.open(mensaje, 'OK', {
       horizontalPosition: this.horizontalPosition,
       verticalPosition: this.verticalPosition,
-      duration:4000
+      duration:1000
     });
   }
 

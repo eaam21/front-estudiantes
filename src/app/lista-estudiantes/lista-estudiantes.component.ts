@@ -55,11 +55,31 @@ export class ListaEstudiantesComponent{
   }
 
   editarEstudiante(idEstudiante:number): void{
-    this.dialog.open(DialogBoxComponent, {
+    const dialogRef = this.dialog.open(DialogBoxComponent, {
       data:{
         "idEstudiante":idEstudiante
       }
     });
+    dialogRef.afterClosed().subscribe(result=>{
+      if(result){
+        this.updateRowData(result.respuestaGuardar)
+      }
+    })
   }
 
+  updateRowData(row_obj:Estudiante){
+    this.dataSource.data.filter((row_valor:Estudiante)=>{
+      if(row_valor.idEstudiante==row_obj.idEstudiante){
+        row_valor.apellidoPaterno=row_obj.apellidoPaterno
+        row_valor.apellidoMaterno=row_obj.apellidoMaterno
+        row_valor.nombres=row_obj.nombres
+        row_valor.tipoDocumento=row_obj.tipoDocumento
+        row_valor.numeroDocumento=row_obj.numeroDocumento
+        row_valor.carrera=row_obj.carrera
+        row_valor.correo=row_obj.correo
+        row_valor.telefono=row_obj.telefono
+      }
+      return true
+    })
+  }
 }
