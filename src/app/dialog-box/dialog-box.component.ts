@@ -54,7 +54,7 @@ export class DialogBoxComponent {
 constructor(
   public dialogRef: MatDialogRef<DialogBoxComponent>,
   private _snackBar: MatSnackBar,
-  @Optional() @Inject(MAT_DIALOG_DATA) public dataEstudiante:Estudiante
+  @Optional() @Inject(MAT_DIALOG_DATA) public dataEstudiante:Estudiante //para traer datos de la ventana principal, en este caso el idEstudiante
 ){
   this.local_data = {...dataEstudiante}
   this.action = this.local_data.action
@@ -93,7 +93,6 @@ constructor(
     }else{
       this.estudianteService.registrar(this.estudiante).subscribe(
         (resp:any)=>{
-          console.log(resp)
           this.dialogRef.close({respuestaGuardar:resp.data})
           this.openSnackBar(resp.mensaje)
         }

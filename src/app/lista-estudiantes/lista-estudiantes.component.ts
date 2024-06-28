@@ -10,6 +10,7 @@ import {MatPaginator, MatPaginatorModule} from '@angular/material/paginator';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatDialog} from '@angular/material/dialog';
 import { DialogBoxComponent } from '../dialog-box/dialog-box.component';
+import { DialogConfirmacionComponent } from '../dialog-confirmacion/dialog-confirmacion.component';
 
 @Component({
   selector: 'app-lista-estudiantes',
@@ -81,5 +82,25 @@ export class ListaEstudiantesComponent{
       }
       return true
     })
+  }
+
+  eliminarEstudiante(idEstudiante:number):void{
+    const dialogRefEliminar = this.dialog.open(DialogConfirmacionComponent, {
+      data:{
+        "idEstudiante":idEstudiante
+      }
+    });
+    dialogRefEliminar.afterClosed().subscribe(result=>{
+      if(result){
+        this.deleteRowData(result.respuestaEliminar)
+      }
+    })
+  }
+
+  deleteRowData(row_obj:Estudiante){
+    const indice = this.dataSource.data.findIndex(function (item:any){ return item.idEstudiante===row_obj.idEstudiante})
+    this.dataSource.data.splice(indice, 1);
+    this.dataSource._updateChangeSubscription(); // Refresh the datasource
+    this.dataSource.paginator = this.paginator; //Refresh paginator
   }
 }

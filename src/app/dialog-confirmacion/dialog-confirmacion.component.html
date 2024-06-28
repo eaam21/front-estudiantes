@@ -1,0 +1,12 @@
+<div>
+    <form type="POST" (submit)="eliminar()">
+        <h1 mat-dialog-title >Confirmación</h1>
+        <mat-dialog-content>
+            <p>¿Esta seguro de eliminar este registro?</p>
+        </mat-dialog-content>
+        <mat-dialog-actions align="end">
+            <button mat-raised-button type="submit">Aceptar</button>
+            <button mat-raised-button mat-dialog-close cdkFocusInitial>Cancelar</button>
+        </mat-dialog-actions>
+    </form>
+</div>
